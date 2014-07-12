@@ -1,0 +1,12 @@
+main: gvlfm78.plugin.Hotels.HotelsMain
+name: Hotels
+version: 1.0
+author: gvlfm78
+description: Allows making of hotels and renting of rooms.
+website: http://dev.bukkit.org/bukkit-plugins/hotels/
+
+depend: [Vault]
+
+commands:
+  Hotels:
+   description: Hotels's main command
