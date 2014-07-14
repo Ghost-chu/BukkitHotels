@@ -1,6 +1,6 @@
-package gvlfm78.plugin.Hotels;
+package handlers;
 
-import gvlfm78.plugin.Hotels.HotelsConfigHandler;
+import handlers.HotelsConfigHandler;
 
 import org.bukkit.plugin.Plugin;
 

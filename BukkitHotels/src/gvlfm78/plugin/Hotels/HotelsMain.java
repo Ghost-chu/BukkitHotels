@@ -1,8 +1,9 @@
 package gvlfm78.plugin.Hotels;
 
-import gvlfm78.plugin.Hotels.HotelsCommandHandler;
 import gvlfm78.plugin.Hotels.HotelsListener;
 import gvlfm78.plugin.Hotels.Metrics;
+import handlers.HotelsCommandHandler;
+import handlers.HotelsConfigHandler;
 
 import java.io.File;
 import java.io.IOException;
