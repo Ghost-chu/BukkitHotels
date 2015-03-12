@@ -3,9 +3,9 @@ package gvlfm78.plugin.Hotels;
 import java.io.File;
 import java.io.IOException;
 
-import handlers.HotelsCommandHandler;
-import handlers.HotelsConfigHandler;
-import managers.GameLoop;
+import gvlfm78.plugin.Hotels.handlers.HotelsCommandHandler;
+import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+import gvlfm78.plugin.Hotels.managers.GameLoop;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package managers;
+package gvlfm78.plugin.Hotels.managers;
 
 import java.io.File;
 import java.io.FilenameFilter;
