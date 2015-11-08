@@ -1,10 +1,5 @@
 package gvlfm78.plugin.Hotels;
 
-import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
-import gvlfm78.plugin.Hotels.managers.HotelsMessageManager;
-import gvlfm78.plugin.Hotels.managers.SignManager;
-import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +26,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+import gvlfm78.plugin.Hotels.managers.HotelsMessageManager;
+import gvlfm78.plugin.Hotels.managers.SignManager;
+import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
 
 public class HotelsListener implements Listener {
 
