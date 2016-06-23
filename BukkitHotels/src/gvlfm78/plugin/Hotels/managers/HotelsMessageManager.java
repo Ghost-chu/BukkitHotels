@@ -1,21 +1,16 @@
 package gvlfm78.plugin.Hotels.managers;
 
+import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import gvlfm78.plugin.Hotels.HotelsMain;
-import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
-
 public class HotelsMessageManager {
 
-	private HotelsMain plugin;
-	public HotelsMessageManager(HotelsMain instance)
-	{
-		this.plugin = instance;
-	}
+	public HotelsMessageManager(){}
 
-	HotelsConfigHandler HConH = new HotelsConfigHandler(plugin);
+	HotelsConfigHandler HConH = new HotelsConfigHandler();
 
 	public String mes(String path){
 		String mes = HConH.getLocale().getString(path);
