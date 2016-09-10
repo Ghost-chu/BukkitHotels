@@ -1,5 +1,7 @@
 package gvlfm78.plugin.Hotels;
 
+import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -8,8 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-
-import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
 
 public class HotelsAPI {
 
