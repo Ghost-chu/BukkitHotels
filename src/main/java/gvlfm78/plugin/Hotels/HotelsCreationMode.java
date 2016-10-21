@@ -28,6 +28,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import gvlfm78.plugin.Hotels.events.HotelCreateEvent;
+import gvlfm78.plugin.Hotels.events.RoomCreateEvent;
 import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
 import gvlfm78.plugin.Hotels.managers.Mes;
 
@@ -84,7 +86,8 @@ public class HotelsCreationMode {
 		}
 		else{
 			p.sendMessage(Mes.mes("chat.creationMode.selectionInvalid")); return; }
-		hotel.create(r, p);//TODO Call hotel created event
+		hotel.create(r, p);
+		Bukkit.getPluginManager().callEvent(new HotelCreateEvent(hotel)); //Call HotelCreateEvent
 	}
 
 	public void roomSetup(String hotelName,int roomNum,Player p){
@@ -116,6 +119,7 @@ public class HotelsCreationMode {
 			else{
 				p.sendMessage(Mes.mes("chat.creationMode.selectionInvalid")); return; }
 			room.createRegion(r, p);
+		    Bukkit.getPluginManager().callEvent(new RoomCreateEvent(room));// Call RoomCreateEvent
 			
 		}
 		else
