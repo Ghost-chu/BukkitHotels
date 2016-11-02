@@ -1,4 +1,4 @@
-package gvlfm78.plugin.Hotels;
+package gvlfm78.plugin.Hotels.updateChecker;
 
 import java.io.BufferedReader;
 import java.io.IOException;

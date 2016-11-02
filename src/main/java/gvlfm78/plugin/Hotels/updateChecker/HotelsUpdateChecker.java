@@ -1,4 +1,4 @@
-package gvlfm78.plugin.Hotels;
+package gvlfm78.plugin.Hotels.updateChecker;
 
 import java.util.logging.Logger;
 
@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import gvlfm78.plugin.Hotels.HotelsMain;
 import gvlfm78.plugin.Hotels.managers.Mes;
 
 public class HotelsUpdateChecker {
