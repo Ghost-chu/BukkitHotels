@@ -17,6 +17,7 @@ import gvlfm78.plugin.Hotels.Hotel;
 import gvlfm78.plugin.Hotels.HotelsAPI;
 import gvlfm78.plugin.Hotels.HotelsCreationMode;
 import gvlfm78.plugin.Hotels.HotelsMain;
+import gvlfm78.plugin.Hotels.HotelsResult;
 import gvlfm78.plugin.Hotels.Room;
 import gvlfm78.plugin.Hotels.managers.Mes;
 import gvlfm78.plugin.Hotels.managers.SignManager;
@@ -295,13 +296,13 @@ public class HotelsCommandExecutor {
 			return;
 		}
 
-		int errorLevel = room.renumber(newNum);
-		switch(errorLevel){
+		HotelsResult result = room.renumber(newNum);
+		switch(result){
 		case 1: player.sendMessage(Mes.mes("chat.commands.renumber.newNumTooBig")); break;
 		case 2: player.sendMessage(Mes.mes("chat.commands.hotelNonExistant")); break;
 		case 3: player.sendMessage(Mes.mes("chat.commands.roomNonExistant")); break;
 		case 4: player.sendMessage(Mes.mes("chat.use.fileNonExistant")); break;
-		case 5: player.sendMessage(Mes.mes("chat.sign.place")); break;//Not a sign
+		case 5: player.sendMessage(Mes.mes("chat.commands.rent.invalidLocation")); break;//Not a sign
 		case 6: player.sendMessage(Mes.mes("chat.sign.place.outOfRegion")); break;
 		default: player.sendMessage(Mes.mes("chat.commands.renumber.success").replaceAll("%oldnum%", String.valueOf(oldNum)).replaceAll("%newnum%", String.valueOf(newNum)).replaceAll("%hotel%", hotel.getName()));
 		}
