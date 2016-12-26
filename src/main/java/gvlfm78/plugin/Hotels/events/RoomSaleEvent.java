@@ -4,19 +4,18 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import gvlfm78.plugin.Hotels.Hotel;
+import gvlfm78.plugin.Hotels.trade.RoomBuyer;
 
-public class HotelRenameEvent extends Event implements Cancellable {
+public class RoomSaleEvent extends Event implements Cancellable {
 
+	private RoomBuyer rb;
 	private static final HandlerList handlers = new HandlerList();
-	private Hotel hotel;
-	private String newName;
 	private boolean cancel;
-	
+	double revenue;
 
-	public HotelRenameEvent(Hotel hotel, String newName){
-		this.hotel = hotel;
-		this.newName = newName;
+	public RoomSaleEvent(RoomBuyer rb, double revenue){
+		this.rb = rb;
+		this.revenue = revenue;
 	}
 
 	@Override
@@ -28,16 +27,11 @@ public class HotelRenameEvent extends Event implements Cancellable {
 		return handlers;
 	}
 
-	public Hotel getHotel(){
-		return hotel;
+	public RoomBuyer getRoomBuyer(){
+		return rb;
 	}
-	
-	public String getNewName(){
-		return newName;
-	}
-	
-	public void setNewName(String name){
-		newName = name;
+	public double getRevenue(){
+		return revenue;
 	}
 
 	@Override
@@ -48,5 +42,11 @@ public class HotelRenameEvent extends Event implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancel = cancel;
+	}
+	public void setPrice(double price){
+		rb.setPrice(price);
+	}
+	public void setRevenue(double revenue){
+		this.revenue = revenue;
 	}
 }

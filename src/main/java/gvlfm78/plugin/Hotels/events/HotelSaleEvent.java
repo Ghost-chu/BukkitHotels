@@ -1,17 +1,21 @@
 package gvlfm78.plugin.Hotels.events;
 
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import gvlfm78.plugin.Hotels.Hotel;
+import gvlfm78.plugin.Hotels.trade.HotelBuyer;
 
-public class HotelSaleEvent extends Event{
+public class HotelSaleEvent extends Event implements Cancellable {
 	
-	private Hotel hotel;
+	private HotelBuyer hb;
 	private static final HandlerList handlers = new HandlerList();
+	private boolean cancel;
+	double revenue;
 
-	public HotelSaleEvent(Hotel hotel){
-		this.hotel = hotel;
+	public HotelSaleEvent(HotelBuyer hb, double revenue){
+		this.hb = hb;
+		this.revenue = revenue;
 	}
 
 	@Override
@@ -23,7 +27,26 @@ public class HotelSaleEvent extends Event{
 		return handlers;
 	}
 
-	public Hotel getHotel(){
-		return hotel;
+	public HotelBuyer getHotelBuyer(){
+		return hb;
+	}
+	public double getRevenue(){
+		return revenue;
+	}
+
+	@Override
+	public boolean isCancelled() {
+		return cancel;
+	}
+
+	@Override
+	public void setCancelled(boolean cancel) {
+		this.cancel = cancel;
+	}
+	public void setPrice(double price){
+		hb.setPrice(price);
+	}
+	public void setRevenue(double revenue){
+		this.revenue = revenue;
 	}
 }
