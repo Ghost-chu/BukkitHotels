@@ -19,9 +19,12 @@ import gvlfm78.plugin.Hotels.HotelsMain;
 import gvlfm78.plugin.Hotels.Room;
 import gvlfm78.plugin.Hotels.exceptions.BlockNotSignException;
 import gvlfm78.plugin.Hotels.exceptions.EventCancelledException;
+import gvlfm78.plugin.Hotels.exceptions.HotelNonExistentException;
+import gvlfm78.plugin.Hotels.exceptions.NotRentedException;
 import gvlfm78.plugin.Hotels.exceptions.RenterNonExistentException;
 import gvlfm78.plugin.Hotels.exceptions.RoomNonExistentException;
 import gvlfm78.plugin.Hotels.exceptions.ValuesNotMatchingException;
+import gvlfm78.plugin.Hotels.exceptions.WorldNonExistentException;
 import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
 import gvlfm78.plugin.Hotels.managers.HotelsFileFinder;
 import gvlfm78.plugin.Hotels.managers.Mes;
@@ -63,7 +66,9 @@ public class RoomTask extends BukkitRunnable {
 				roomNum = Integer.parseInt(roomNumString);
 			}
 			catch(Exception e){
-				file.delete(); continue; //TODO add debug messages so we know why it was deleted
+				file.delete();
+				Mes.debug(e.getMessage());
+				continue;
 			}
 			
 			Room room = new Room(world, hotelName, roomNum); //Creating room object with info from file
@@ -75,7 +80,7 @@ public class RoomTask extends BukkitRunnable {
 				changed = false;
 			} catch (ValuesNotMatchingException | RoomNonExistentException | BlockNotSignException
 					| RenterNonExistentException | EventCancelledException | IOException | DataException
-					| WorldEditException e) {
+					| WorldEditException | WorldNonExistentException | HotelNonExistentException | NotRentedException e) {
 				Mes.debug(e.getMessage());
 			}
 			finally{
