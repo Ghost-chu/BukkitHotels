@@ -1,4 +1,4 @@
-package gvlfm78.plugin.Hotels.Signs;
+package gvlfm78.plugin.Hotels.signs;
 
 import java.io.File;
 import java.util.UUID;

@@ -10,13 +10,14 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import gvlfm78.plugin.Hotels.Signs.ReceptionSign;
 import gvlfm78.plugin.Hotels.events.HotelCreateEvent;
 import gvlfm78.plugin.Hotels.events.HotelDeleteEvent;
 import gvlfm78.plugin.Hotels.events.HotelRenameEvent;
@@ -27,6 +28,7 @@ import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
 import gvlfm78.plugin.Hotels.managers.HotelsFileFinder;
 import gvlfm78.plugin.Hotels.managers.Mes;
 import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
+import gvlfm78.plugin.Hotels.signs.ReceptionSign;
 import gvlfm78.plugin.Hotels.trade.HotelBuyer;
 import gvlfm78.plugin.Hotels.trade.TradesHolder;
 
@@ -39,16 +41,27 @@ public class Hotel {
 	public Hotel(World world, String name){
 		this.world = world;
 		this.name = name.toLowerCase();
-		this.hconfig = getHotelConfig();
+		hconfig = getHotelConfig();
 	}
 	public Hotel(String name){
 		//Use only when world is unknown, due to extra calculations involved to find it
 		this.name = name;
 		for(Hotel hotel : HotelsAPI.getAllHotels()){
 			if(hotel.getName().equalsIgnoreCase(name))
-				this.world = hotel.getWorld();
+				world = hotel.getWorld();
 		}
-		this.hconfig = getHotelConfig();
+		hconfig = getHotelConfig();
+	}
+	public Hotel(String name, CommandSender sender){
+		this.name = name;
+		if(sender instanceof Player) world = ((Player) sender).getWorld();
+		else{
+			for(Hotel hotel : HotelsAPI.getAllHotels()){
+				if(hotel.getName().equalsIgnoreCase(name))
+					world = hotel.getWorld();
+			}
+		}
+		hconfig = getHotelConfig();
 	}
 	///////////////////////
 	////////Getters////////
