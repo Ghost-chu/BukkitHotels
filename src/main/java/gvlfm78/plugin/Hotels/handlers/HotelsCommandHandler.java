@@ -25,6 +25,8 @@ import gvlfm78.plugin.Hotels.events.HotelSaleEvent;
 import gvlfm78.plugin.Hotels.events.RoomSaleEvent;
 import gvlfm78.plugin.Hotels.exceptions.EventCancelledException;
 import gvlfm78.plugin.Hotels.exceptions.HotelNonExistentException;
+import gvlfm78.plugin.Hotels.exceptions.RoomNotSetupException;
+import gvlfm78.plugin.Hotels.exceptions.RoomSignInRoomException;
 import gvlfm78.plugin.Hotels.managers.Mes;
 import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
 import gvlfm78.plugin.Hotels.trade.HotelBuyer;
@@ -693,6 +695,11 @@ public class HotelsCommandHandler implements CommandExecutor {
 				} catch (DataException | IOException | WorldEditException e) {
 					Mes.mes(sender, "chat.commands.somethingWentWrong");
 					e.printStackTrace();
+				}
+				catch (RoomNotSetupException e) {
+					Mes.mes(sender, "chat.commands.resetroom.notSetup");
+				} catch (RoomSignInRoomException e) {
+					Mes.mes(sender, "chat.sign.place.inRoomRegion");
 				}
 			}
 			else if(args[0].equalsIgnoreCase("resetroom")){
