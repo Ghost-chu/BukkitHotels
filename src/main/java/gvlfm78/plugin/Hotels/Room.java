@@ -53,6 +53,7 @@ import gvlfm78.plugin.Hotels.managers.SignManager;
 import gvlfm78.plugin.Hotels.managers.TerrainManager;
 import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
 import gvlfm78.plugin.Hotels.signs.RoomSign;
+import gvlfm78.plugin.Hotels.tasks.RoomResetQueue;
 import gvlfm78.plugin.Hotels.trade.RoomBuyer;
 import gvlfm78.plugin.Hotels.trade.TradesHolder;
 
@@ -634,7 +635,7 @@ public class Room {
 
 		updateSign();
 
-		if(shouldReset()) reset();
+		if(shouldReset()) RoomResetQueue.add(this);
 	}
 
 	public void reset() throws IOException, WorldEditException, DataException {
