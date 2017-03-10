@@ -28,6 +28,7 @@ import gvlfm78.plugin.Hotels.exceptions.HotelNonExistentException;
 import gvlfm78.plugin.Hotels.exceptions.RoomNotSetupException;
 import gvlfm78.plugin.Hotels.exceptions.RoomSignInRoomException;
 import gvlfm78.plugin.Hotels.managers.Mes;
+import gvlfm78.plugin.Hotels.managers.SignManager;
 import gvlfm78.plugin.Hotels.managers.WorldGuardManager;
 import gvlfm78.plugin.Hotels.trade.HotelBuyer;
 import gvlfm78.plugin.Hotels.trade.RoomBuyer;
@@ -126,7 +127,26 @@ public class HotelsCommandHandler implements CommandExecutor {
 				Player p = (Player) sender;
 				if(!Mes.hasPerm(p, "hotels.rent")){ Mes.mes(p ,"chat.noPermission"); return false; }
 				if(length<3) Mes.mes(p ,"chat.commands.rent.usage");
-				else HCE.cmdRent(sender, args[1], args[2]);
+
+				Hotel hotel = new Hotel(p.getWorld(), args[1]);
+
+				//If Hotel exists
+				if(!hotel.exists()) return false;
+
+				Room room = new Room(hotel, args[2]);
+				Location signLoc = room.getSignLocation();
+
+				int x = signLoc.getBlockX();
+				int y = signLoc.getBlockY();
+				int z = signLoc.getBlockZ();
+				//If sign is within region
+				if(!hotel.getRegion().contains(x, y, z)){ Mes.mes(p, "chat.sign.use.signOutOfRegion"); return false; }
+
+				if(!room.doesSignFileExist()){ Mes.mes(p, "chat.sign.use.fileNonExistent"); return false; }
+
+				if(!hotel.getName().equalsIgnoreCase(room.getHotelNameFromConfig())){ Mes.mes(p, "chat.sign.use.differentHotelNames"); return false; }
+				if(room.getNum()!=room.getRoomNumFromConfig()){ Mes.mes(p, "chat.sign.use.differentRoomNums"); return false; };
+				SignManager.rentRoom(p, room);
 			}
 			else if(args[0].equalsIgnoreCase("friend") || args[0].equalsIgnoreCase("f")){
 				if(!isPlayer){ Mes.mes(sender ,"chat.commands.consoleRejected"); return false; }
