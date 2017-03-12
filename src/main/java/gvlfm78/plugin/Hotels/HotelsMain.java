@@ -10,12 +10,12 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import gvlfm78.plugin.Hotels.MCMetrics.Graph;
-import gvlfm78.plugin.Hotels.handlers.HotelsCommandHandler;
-import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+import gvlfm78.plugin.Hotels.handlers.HTCmdExecutor;
+import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
 import gvlfm78.plugin.Hotels.managers.Mes;
 import gvlfm78.plugin.Hotels.tasks.RoomTask;
-import gvlfm78.plugin.Hotels.updateChecker.HotelsUpdateChecker;
-import gvlfm78.plugin.Hotels.updateChecker.HotelsUpdateListener;
+import gvlfm78.plugin.Hotels.updateChecker.HTUpdateChecker;
+import gvlfm78.plugin.Hotels.updateChecker.HTUpdateListener;
 import net.milkbowl.vault.economy.Economy;
 
 public class HotelsMain extends JavaPlugin{
@@ -31,12 +31,12 @@ public class HotelsMain extends JavaPlugin{
 	public void onEnable(){
 		INSTANCE = this;
 		
-		HotelsConfigHandler.initialise(this);
+		HTConfigHandler.initialise(this);
 
 		PluginDescriptionFile pdfFile = this.getDescription();
 		//Listeners and stuff
-		getServer().getPluginManager().registerEvents((new HotelsListener()), this);//Firing event listener
-		getCommand("Hotels").setExecutor(new HotelsCommandHandler(this));//Firing commands listener
+		getServer().getPluginManager().registerEvents((new HTListener()), this);//Firing event listener
+		getCommand("Hotels").setExecutor(new HTCmdExecutor(this));//Firing commands listener
 		setupEconomy();
 		//Economy and stuff
 		if (!setupEconomy())
@@ -46,7 +46,7 @@ public class HotelsMain extends JavaPlugin{
 
 		//Room sign checker and updater
 		roomTask = new RoomTask(this);
-		int roomMins = getConfig().getInt("roomTaskTimerMinutes");
+		int roomMins = getConfig().getInt("roomTaskTimerMinutes", 2);
 
 		boolean isRoomRunning;
 		try{
@@ -56,8 +56,7 @@ public class HotelsMain extends JavaPlugin{
 			isRoomRunning = false;
 		}
 		if(!isRoomRunning){
-			if(roomMins<=0)
-				roomMins = 2;
+			if(roomMins<=0) roomMins = 2;
 			roomTask.runTaskTimer(this, 200, roomMins*60*20);
 		}
 
@@ -127,7 +126,7 @@ public class HotelsMain extends JavaPlugin{
 			}
 
 			//Languages
-			switch(HotelsConfigHandler.getLanguage()){
+			switch(HTConfigHandler.getLanguage()){
 			case "en": case "enGB":
 				language.addPlotter(new MCMetrics.Plotter("English") {
 					@Override
@@ -207,7 +206,7 @@ public class HotelsMain extends JavaPlugin{
 		metrics.addCustomChart(new Metrics.SimplePie("locale_language") {
 			@Override
 			public String getValue() {
-				switch(HotelsConfigHandler.getLanguage()){
+				switch(HTConfigHandler.getLanguage()){
 				case "en": case "enGB": return "English";
 				case "it": case "itIT": return "Italian";
 				case "fr": case "frFR": return "French";
@@ -220,14 +219,14 @@ public class HotelsMain extends JavaPlugin{
 		});
 
 		//Checking for updates
-		if(getConfig().getBoolean("checkForUpdates")){
-			getServer().getPluginManager().registerEvents((new HotelsUpdateListener(this, this.getFile())), this);
+		if(getConfig().getBoolean("checkForUpdates", true)){
+			getServer().getPluginManager().registerEvents((new HTUpdateListener(this, this.getFile())), this);
 
 			final HotelsMain plugin = this;
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(this, new Runnable (){
 				public void run(){
-					HotelsUpdateChecker HUC = new HotelsUpdateChecker(plugin, plugin.getFile());
+					HTUpdateChecker HUC = new HTUpdateChecker(plugin, plugin.getFile());
 					HUC.sendUpdateMessages(getLogger());
 				}
 			},20L);

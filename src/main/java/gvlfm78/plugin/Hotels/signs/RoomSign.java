@@ -14,9 +14,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import gvlfm78.plugin.Hotels.Hotel;
 import gvlfm78.plugin.Hotels.Room;
-import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
 import gvlfm78.plugin.Hotels.managers.Mes;
-import gvlfm78.plugin.Hotels.managers.SignManager;
+import gvlfm78.plugin.Hotels.managers.HTSignManager;
 
 public class RoomSign extends AbstractSign{
 
@@ -50,9 +50,9 @@ public class RoomSign extends AbstractSign{
 		Sign s = (Sign) b;
 
 		if(!room.isFree())
-			s.setLine(2, SignManager.TimeFormatter(room.getExpiryMinute()-System.currentTimeMillis()/1000/60));
+			s.setLine(2, HTSignManager.TimeFormatter(room.getExpiryMinute()-System.currentTimeMillis()/1000/60));
 		else{
-			s.setLine(2, SignManager.TimeFormatter(room.getTime()));
+			s.setLine(2, HTSignManager.TimeFormatter(room.getTime()));
 			s.setLine(3, ChatColor.GREEN + Mes.getStringNoPrefix("sign.vacant"));
 		}
 		s.update();
@@ -100,7 +100,7 @@ public class RoomSign extends AbstractSign{
 		return new Location(world, x, y, z);
 	}
 	public File getFile(){
-		return HotelsConfigHandler.getSignFile(room.getHotel().getName(), room.getNum());
+		return HTConfigHandler.getSignFile(room.getHotel().getName(), room.getNum());
 	}
 	public Room getRoom(){
 		return room;

@@ -37,7 +37,7 @@ import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionType;
 
-import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
+import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
 
 /**
  * @author desht, very heavily modified by gvlfm78 to use only WE 6+ API and support polygonal regions
@@ -46,16 +46,16 @@ import gvlfm78.plugin.Hotels.handlers.HotelsConfigHandler;
  * simple for other plugins to use.
  */
 
-public class TerrainManager {
+public class HTTerrainManager {
 
 	private final WorldEdit we;
 
-	public TerrainManager(Player player) {
+	public HTTerrainManager(Player player) {
 		WorldEditPlugin wep = (WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit");
 		we = wep.getWorldEdit();
 	}
 
-	public TerrainManager(org.bukkit.World world) {
+	public HTTerrainManager(org.bukkit.World world) {
 		we = ((WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit")).getWorldEdit();
 	}
 	public void saveTerrain(File saveFile, org.bukkit.World world, Location l1, Location l2) throws DataException, IOException, WorldEditException {
@@ -80,7 +80,7 @@ public class TerrainManager {
 		saveTerrain(saveFile, bworld, region, origin);
 	}
 	public void saveTerrain(File saveFile, World world, Region selection, Vector origin) throws DataException, IOException, WorldEditException {
-		File schemDir = HotelsConfigHandler.getFile("Schematics");
+		File schemDir = HTConfigHandler.getFile("Schematics");
 		if(!schemDir.exists()) schemDir.mkdirs();
 
 		EditSession editSession = we.getEditSessionFactory().getEditSession(world, -1);
