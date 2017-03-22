@@ -30,6 +30,7 @@ import gvlfm78.plugin.Hotels.exceptions.NotRentedException;
 import gvlfm78.plugin.Hotels.exceptions.NumberTooLargeException;
 import gvlfm78.plugin.Hotels.exceptions.OutOfRegionException;
 import gvlfm78.plugin.Hotels.exceptions.RoomNonExistentException;
+import gvlfm78.plugin.Hotels.exceptions.UserAlreadyThereException;
 import gvlfm78.plugin.Hotels.exceptions.UserNonExistentException;
 import gvlfm78.plugin.Hotels.exceptions.WorldNonExistentException;
 import gvlfm78.plugin.Hotels.managers.HTSignManager;
@@ -240,6 +241,8 @@ public class HTCmdSurrogate {
 			Mes.mes(player, "chat.commands.friend.noRenter");
 		} catch (IOException e) {
 			Mes.mes(player, "chat.commands.friend.wrongData");
+		} catch (UserAlreadyThereException e) {
+			Mes.mes(player, "chat.commands.friend.alreadyFriend");
 		}
 	}
 	public static void cmdFriendRemove(Player player, String hotelName, String roomNum, String friendName){
