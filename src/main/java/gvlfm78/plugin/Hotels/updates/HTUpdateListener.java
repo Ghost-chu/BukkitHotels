@@ -1,4 +1,4 @@
-package gvlfm78.plugin.Hotels.updateChecker;
+package gvlfm78.plugin.Hotels.updates;
 
 import java.io.File;
 

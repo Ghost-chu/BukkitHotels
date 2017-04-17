@@ -14,8 +14,8 @@ import gvlfm78.plugin.Hotels.handlers.HTCmdExecutor;
 import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
 import gvlfm78.plugin.Hotels.managers.Mes;
 import gvlfm78.plugin.Hotels.tasks.RoomTask;
-import gvlfm78.plugin.Hotels.updateChecker.HTUpdateChecker;
-import gvlfm78.plugin.Hotels.updateChecker.HTUpdateListener;
+import gvlfm78.plugin.Hotels.updates.HTUpdateChecker;
+import gvlfm78.plugin.Hotels.updates.HTUpdateListener;
 import net.milkbowl.vault.economy.Economy;
 
 public class HotelsMain extends JavaPlugin{
@@ -167,7 +167,7 @@ public class HotelsMain extends JavaPlugin{
 		});
 
 		//Checking for updates
-		if(getConfig().getBoolean("checkForUpdates", true)){
+		if(getConfig().getBoolean("updates", true)){
 			getServer().getPluginManager().registerEvents((new HTUpdateListener(this, this.getFile())), this);
 
 			final HotelsMain plugin = this;

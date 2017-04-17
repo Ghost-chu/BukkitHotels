@@ -1,6 +1,6 @@
 # Hotels plugin by gvlfm78
 # 汉化 By NOBUTS
-# https://poeditor.com/join/project/JZCEZoYecm to help with translations
+# https://github.com/gvlfm78/BukkitHotels/wiki/Localisation to help with translations
 message: 
  hotel: 
   exit: "&a离开了 %hotel% 旅馆"

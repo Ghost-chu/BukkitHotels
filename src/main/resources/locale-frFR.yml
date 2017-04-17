@@ -1,6 +1,6 @@
 # Hotels plugin by gvlfm78
 # Cette traduction pourrait contenir des erreurs. Si vous avez des améliorations vous pouvez contacter gvlfm78:
-# https://poeditor.com/join/project/JZCEZoYecm to help with translations
+# https://github.com/gvlfm78/BukkitHotels/wiki/Localisation to help with translations
 message: 
  hotel: 
   exit: "&aRetourné bientôt à l'hôtel %hotel%"
