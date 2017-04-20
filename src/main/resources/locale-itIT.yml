@@ -2,6 +2,8 @@
 # Traduzione di gvlfm78
 # https://github.com/gvlfm78/BukkitHotels/wiki/Localisation to help with translations
 language: itIT
+version: 1
+#####################################################################################
 message: 
  hotel: 
   exit: "&aTorna presto all'hotel %hotel%"
