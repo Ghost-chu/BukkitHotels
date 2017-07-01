@@ -1,21 +1,16 @@
 package gvlfm78.plugin.Hotels.signs;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import gvlfm78.plugin.Hotels.Hotel;
+import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
+import gvlfm78.plugin.Hotels.managers.Mes;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import gvlfm78.plugin.Hotels.Hotel;
-import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
-import gvlfm78.plugin.Hotels.managers.Mes;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 public class ReceptionSign extends AbstractSign {
 
@@ -23,11 +18,6 @@ public class ReceptionSign extends AbstractSign {
 	private String num;
 	private YamlConfiguration config;
 
-	public ReceptionSign(Hotel hotel, int num){
-		this.hotel = hotel;
-		this.num = String.valueOf(num);
-		config = YamlConfiguration.loadConfiguration(getFile());
-	}
 	public ReceptionSign(Hotel hotel, String num){
 		this.hotel = hotel;
 		this.num = num;

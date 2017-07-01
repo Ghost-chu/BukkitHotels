@@ -3,20 +3,17 @@
  */
 package gvlfm78.plugin.Hotels.tasks;
 
-import java.io.IOException;
-
-import org.bukkit.Bukkit;
-
 import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.world.DataException;
-
 import gvlfm78.plugin.Hotels.HotelsMain;
 import gvlfm78.plugin.Hotels.Room;
 import gvlfm78.plugin.Hotels.managers.Mes;
+import org.bukkit.Bukkit;
+
+import java.io.IOException;
 
 /**
  * Queue room resets and stagger them to minimise lag
- *
  */
 public class RoomResetQueue {
 
@@ -29,7 +26,8 @@ public class RoomResetQueue {
 		long currentTime = System.currentTimeMillis();
 		
 		//This makes it so there is a constant minimum time difference between tasks
-		long secondsUntilLastTaskIsExecuted = delay - (currentTime - lastAdding)/1000;
+		long secondsUntilLastTaskIsExecuted = delay - (currentTime - lastAdding) / 1000;
+
 		if(secondsUntilLastTaskIsExecuted < 0) secondsUntilLastTaskIsExecuted = 0;
 		
 		Bukkit.getScheduler().runTaskLater(PLUGIN, () -> {
@@ -40,6 +38,7 @@ public class RoomResetQueue {
                 e.printStackTrace();
             }
         }, (20 * (delay + secondsUntilLastTaskIsExecuted)) );
+
 		lastAdding = currentTime;
 	}
 }
