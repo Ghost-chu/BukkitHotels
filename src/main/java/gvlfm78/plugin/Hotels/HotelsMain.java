@@ -1,23 +1,22 @@
 package gvlfm78.plugin.Hotels;
 
-import java.io.IOException;
-import java.util.HashMap;
-
+import gvlfm78.plugin.Hotels.MCMetrics.Graph;
+import gvlfm78.plugin.Hotels.handlers.HTCmdExecutor;
+import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
 import gvlfm78.plugin.Hotels.handlers.RoomCommand;
+import gvlfm78.plugin.Hotels.managers.Mes;
+import gvlfm78.plugin.Hotels.tasks.RoomTask;
+import gvlfm78.plugin.Hotels.updates.HTUpdateChecker;
+import gvlfm78.plugin.Hotels.updates.HTUpdateListener;
+import net.milkbowl.vault.economy.Economy;
 import org.bstats.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import gvlfm78.plugin.Hotels.MCMetrics.Graph;
-import gvlfm78.plugin.Hotels.handlers.HTCmdExecutor;
-import gvlfm78.plugin.Hotels.handlers.HTConfigHandler;
-import gvlfm78.plugin.Hotels.managers.Mes;
-import gvlfm78.plugin.Hotels.tasks.RoomTask;
-import gvlfm78.plugin.Hotels.updates.HTUpdateChecker;
-import gvlfm78.plugin.Hotels.updates.HTUpdateListener;
-import net.milkbowl.vault.economy.Economy;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class HotelsMain extends JavaPlugin{
 
@@ -27,14 +26,15 @@ public class HotelsMain extends JavaPlugin{
 	private RoomTask roomTask;
 
 	private static HotelsMain INSTANCE;
+	private static PluginDescriptionFile pdfFile;
 
 	@Override
 	public void onEnable(){
 		INSTANCE = this;
 
 		HTConfigHandler.initialise(this);
+		pdfFile = getDescription();
 
-		PluginDescriptionFile pdfFile = this.getDescription();
 		//Listeners and stuff
 		getServer().getPluginManager().registerEvents((new HTListener()), this);//Fire event listener
 		getCommand("Hotels").setExecutor(new HTCmdExecutor(this));//Fire main commands listener
@@ -193,7 +193,7 @@ public class HotelsMain extends JavaPlugin{
 		if (economyProvider != null) economy = economyProvider.getProvider();
 		return economy != null;
 	}
-	public static HotelsMain getHotels(){
-		return INSTANCE;
+	public static PluginDescriptionFile getPluginDescription(){
+		return pdfFile;
 	}
 }
