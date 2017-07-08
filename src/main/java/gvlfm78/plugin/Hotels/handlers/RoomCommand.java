@@ -1,14 +1,9 @@
 package gvlfm78.plugin.Hotels.handlers;
 
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import gvlfm78.plugin.Hotels.HTCreationMode;
-import gvlfm78.plugin.Hotels.Hotel;
-import gvlfm78.plugin.Hotels.HotelsMain;
-import gvlfm78.plugin.Hotels.Room;
 import gvlfm78.plugin.Hotels.exceptions.RoomSignInRoomException;
 import gvlfm78.plugin.Hotels.managers.HTSignManager;
 import gvlfm78.plugin.Hotels.managers.Mes;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -18,12 +13,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class RoomCommand implements CommandExecutor {
-
-	private HotelsMain plugin;
 
 	/**
 	 Command equivalent of setting up a room sign
@@ -32,10 +25,7 @@ public class RoomCommand implements CommandExecutor {
 	 also if they have room selected but
 	 room isn't created it does it for them
 	 */
-	public RoomCommand(HotelsMain plugin){
-		this.plugin = plugin;
-	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!cmd.getLabel().equalsIgnoreCase("room")) return false;
@@ -54,14 +44,14 @@ public class RoomCommand implements CommandExecutor {
 
 		World w = p.getWorld();
 
-		HashSet<Material> transparent_blocks = new HashSet<Material>();
-
-		transparent_blocks.add(Material.AIR);
+		HashSet<Material> transparent_blocks = new HashSet<Material>(
+				Arrays.asList(Material.AIR, Material.LADDER)
+		);
 
 		Block target = p.getTargetBlock(transparent_blocks, 100);
 		
 		Material mat = target.getType();
-		
+
 		if(mat != Material.SIGN_POST && mat != Material.WALL_SIGN){
 			Mes.mes(p,"chat.room.notSign");
 			return false;
