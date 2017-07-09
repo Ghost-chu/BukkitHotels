@@ -1,6 +1,7 @@
 package gvlfm78.plugin.Hotels.handlers;
 
 import gvlfm78.plugin.Hotels.HTCreationMode;
+import gvlfm78.plugin.Hotels.Hotel;
 import gvlfm78.plugin.Hotels.exceptions.RoomSignInRoomException;
 import gvlfm78.plugin.Hotels.managers.HTSignManager;
 import gvlfm78.plugin.Hotels.managers.Mes;
@@ -44,9 +45,12 @@ public class RoomCommand implements CommandExecutor {
 
 		World w = p.getWorld();
 
-		HashSet<Material> transparent_blocks = new HashSet<Material>(
-				Arrays.asList(Material.AIR, Material.LADDER)
-		);
+		//Check if they're the hotel owner
+		Hotel hotel = new Hotel(w, args[0]);
+		if(!Mes.hasPerm(p, "hotels.sign.create.admin") && !hotel.isOwner(p.getUniqueId())){ Mes.mes(p, "chat.commands.youDoNotOwnThat"); return false; }
+
+		HashSet<Material> transparent_blocks = new HashSet<>(
+				Arrays.asList(Material.AIR, Material.LADDER));
 
 		Block target = p.getTargetBlock(transparent_blocks, 100);
 		
