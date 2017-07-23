@@ -1,10 +1,9 @@
 package gvlfm78.plugin.Hotels.events;
 
+import gvlfm78.plugin.Hotels.Room;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import gvlfm78.plugin.Hotels.Room;
 
 public class RoomCreateEvent extends Event implements Cancellable {
 

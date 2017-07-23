@@ -1,10 +1,9 @@
 package gvlfm78.plugin.Hotels.events;
 
+import gvlfm78.plugin.Hotels.trade.HotelBuyer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import gvlfm78.plugin.Hotels.trade.HotelBuyer;
 
 public class HotelSaleEvent extends Event implements Cancellable {
 	

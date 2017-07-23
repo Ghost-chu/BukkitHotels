@@ -1,14 +1,13 @@
 package gvlfm78.plugin.Hotels.updates;
 
-import java.io.File;
-
+import gvlfm78.plugin.Hotels.HotelsMain;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import gvlfm78.plugin.Hotels.HotelsMain;
+import java.io.File;
 
 public class HTUpdateListener implements Listener{
 
