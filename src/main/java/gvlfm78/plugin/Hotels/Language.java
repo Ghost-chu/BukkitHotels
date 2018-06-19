@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gvlfm78.plugin.Hotels;
 
 import java.util.Locale;
@@ -9,7 +6,6 @@ import java.util.Locale;
  * @author gvlfm78
  * Converts between language codes and names
  */
-
 public enum Language {
 	English (new String[] {"enGB", "en"}),
 	Italian (new String[] {"itIT", "it"}),
